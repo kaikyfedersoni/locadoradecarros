@@ -38,7 +38,7 @@ public class CarroController {
     public String editarCarro(@PathVariable String id, Model model) {
         Optional<Carro> carro = carroService.buscarCarroPorId(id);   
         model.addAttribute("carro", carro);
-        return "formCarro"; // Reutiliza o template de formulário
+        return "pages/formCarro"; // Reutiliza o template de formulário
     }
 
     @PostMapping("/editar/{id}")
@@ -51,13 +51,13 @@ public class CarroController {
     public String listarTodos(Model model) {
         List<Carro> carros = carroService.listarTodos();
         model.addAttribute("carros", carros);
-        return "listarCarros";
+        return "pages/listarCarros";
     }
 
     @GetMapping("/novo")
     public String novoCarroForm(Model model) {
         model.addAttribute("carro", new Carro());
-        return "formCarro"; 
+        return "pages/formCarro"; 
     }
 
     
