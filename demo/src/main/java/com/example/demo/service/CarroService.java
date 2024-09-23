@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,6 +54,11 @@ public class CarroService{
     public void removerCarro(@PathVariable String id) {
         carroRepository.deleteById(id);
     }
+
+    public Optional<Carro> buscarCarroPorId(String id) {
+        return carroRepository.findById(id);
+    }
+
 
 
 
