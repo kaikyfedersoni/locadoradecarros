@@ -22,31 +22,15 @@
     <h1 th:if="${carro.placa == null}">Adicionar Carro</h1>
     <h1 th:if="${carro.placa != null}">Editar Carro</h1>
     <form th:action="@{/carros}" th:object="${carro}" method="post">
-
-
             <label>Modelo: <input type="text" th:field="*{modelo}" /></label><br>
             <div class="col-1 ">
-                <label for="txtMarca">Marca</label>
-                <br>
-                <select name="Marca" style="height: 30px;" th:field="*{modelo}">
-                  <option value="0" disabled selected> Selecione </option>
-                  <option value="1"> BMW </option>
-                  <option value="2"> BYD </option>
-                  <option value="3"> Chevrolet </option>
-                  <option value="4"> Fiat </option>
-                  <option value="5"> Jeep </option>
-                  <option value="6"> Land Rover </option>
-                  <option value="7"> Mitsubishi </option>
-                  <option value="8"> Nissan </option>
-                  <option value="9"> Renault</option>
-                  <option value="10"> Toyota </option>
-                  <option value="11"> Volkswagen </option>
-                  <option value="12"> Volvo </option>
-                </select>
+                <label>Marca: <select th:field="*{marca}">
+                    <option th:each="t : ${T(com.example.demo.model.Marca).values()}" th:value="${t}" th:text="${t}"></option>
+                </select></label><br>
               </div>
-
             <label>Placa: <input type="text" th:field="*{placa}" /></label>
             <label>Cor: <input type="text" th:field="*{cor}" /></label><br>
+            <label>Ano: <input type="number" th:field="*{ano}" /></label><br>
             <label>Tipo: <select th:field="*{tipo}">
                 <option th:each="t : ${T(com.example.demo.model.Tipo).values()}" th:value="${t}" th:text="${t}"></option>
             </select></label><br>

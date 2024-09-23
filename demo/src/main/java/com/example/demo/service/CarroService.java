@@ -39,6 +39,7 @@ public class CarroService{
                     carro.setCor(novoCarro.getCor());
                     carro.setTipo(novoCarro.getTipo());
                     carro.setMarca(novoCarro.getMarca());
+                    carro.setAno(novoCarro.getAno());
                     return carroRepository.save(carro);
                 })
                 .orElseGet(() -> {
@@ -58,10 +59,5 @@ public class CarroService{
     public Optional<Carro> buscarCarroPorId(String id) {
         return carroRepository.findById(id);
     }
-
-
-
-
-     
 
 }
