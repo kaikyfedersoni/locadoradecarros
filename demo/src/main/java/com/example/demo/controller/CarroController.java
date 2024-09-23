@@ -1,21 +1,21 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping; 
 
 import com.example.demo.model.Carro;
 import com.example.demo.service.CarroService;
 
-@RestController
+@Controller
 @RequestMapping("/carros")
 public class CarroController {
     
@@ -29,24 +29,42 @@ public class CarroController {
     public CarroController(){}
 
     @PostMapping
-    public Carro novoCarro(@RequestBody Carro carro) {
-        return carroService.novoCarro(carro);
+    public String salvarCarro(@ModelAttribute Carro carro) {
+        carroService.novoCarro(carro);
+        return "redirect:/carros";
+    }   
+
+    @GetMapping("/editar/{id}")
+    public String editarCarro(@PathVariable String id, Model model) {
+        Optional<Carro> carro = carroService.buscarCarroPorId(id);   
+        model.addAttribute("carro", carro);
+        return "formCarro"; // Reutiliza o template de formulário
     }
 
-    @PutMapping("/{id}")
-    public Carro alterarCarro(@RequestBody Carro novoCarro, @PathVariable String id) {
-        return carroService.alterarCarro(novoCarro, id);
+    @PostMapping("/editar/{id}")
+    public String alterarCarro(@ModelAttribute Carro novoCarro, @PathVariable String id) {
+        carroService.alterarCarro(novoCarro, id);
+        return "redirect:/carros";
     }
 
     @GetMapping
-    public List<Carro> listarTodos() {
-        return carroService.listarTodos();
+    public String listarTodos(Model model) {
+        List<Carro> carros = carroService.listarTodos();
+        model.addAttribute("carros", carros);
+        return "listarCarros";
+    }
+
+    @GetMapping("/novo")
+    public String novoCarroForm(Model model) {
+        model.addAttribute("carro", new Carro());
+        return "formCarro"; 
     }
 
     
-    @DeleteMapping("/{id}")
-    public void removerCarro(@PathVariable String id) {
+    @GetMapping("/remover/{id}")
+    public String removerCarro(@PathVariable String id) {
         carroService.removerCarro(id);
+        return "redirect:/carros";
     }
     
 }

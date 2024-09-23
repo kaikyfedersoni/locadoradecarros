@@ -17,7 +17,6 @@ public class Carro {
     @Enumerated(EnumType.STRING) 
     private Tipo tipo;
 
-    
     public Carro(){}
 
     public Carro(String placa,String marca, String modelo,String cor, Tipo tipo ){

@@ -6,5 +6,4 @@ import com.example.demo.model.Carro;
 
 public interface CarroRepository extends JpaRepository<Carro, String>{
 
-    
 }

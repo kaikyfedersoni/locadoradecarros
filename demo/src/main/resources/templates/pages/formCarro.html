@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Novo Carro</title>
+</head>
+<body>
+    <h1 th:if="${carro.placa == null}">Adicionar Carro</h1>
+    <h1 th:if="${carro.placa != null}">Editar Carro</h1>
+    <form th:action="@{/carros}" th:object="${carro}" method="post">
+        <label>Marca: <input type="text" th:field="*{marca}" /></label><br>
+        <label>Modelo: <input type="text" th:field="*{modelo}" /></label><br>
+        <label>Placa: <input type="text" th:field="*{placa}" /></label>
+        <label>Cor: <input type="text" th:field="*{cor}" /></label><br>
+        <label>Tipo: <select th:field="*{tipo}">
+            <option th:each="t : ${T(com.example.demo.model.Tipo).values()}" th:value="${t}" th:text="${t}"></option>
+        </select></label><br>
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>
