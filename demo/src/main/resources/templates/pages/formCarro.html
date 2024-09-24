@@ -1,43 +1,95 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Novo Carro</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/estilocarro.css}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-
-    <link rel ="stylesheet" type ="text/css" href = "../styles/estilocarro.css" media = "screen"/>
-
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
 </head>
+
 <body>
-<div class = "caixa">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div class = "formulario">
-    <h1 th:if="${carro.placa == null}">Adicionar Carro</h1>
-    <h1 th:if="${carro.placa != null}">Editar Carro</h1>
-    <form th:action="@{/carros}" th:object="${carro}" method="post">
-            <label>Modelo: <input type="text" th:field="*{modelo}" /></label><br>
-            <div class="col-1 ">
-                <label>Marca: <select th:field="*{marca}">
-                    <option th:each="t : ${T(com.example.demo.model.Marca).values()}" th:value="${t}" th:text="${t}"></option>
-                </select></label><br>
-              </div>
-            <label>Placa: <input type="text" th:field="*{placa}" /></label>
-            <label>Cor: <input type="text" th:field="*{cor}" /></label><br>
-            <label>Ano: <input type="number" th:field="*{ano}" /></label><br>
-            <label>Tipo: <select th:field="*{tipo}">
-                <option th:each="t : ${T(com.example.demo.model.Tipo).values()}" th:value="${t}" th:text="${t}"></option>
-            </select></label><br>
-            
-            <button type="submit">Salvar</button>
-        </form>
+    <div class="fundo">
+        <div class="espacotitulo">
+            <br>
+            <div class="row">
+                <div class="titulo">
+                    <h1 class="titulo; borda-sombra" th:if="${carro.placa == null}">ADICIONAR VEÍCULO</h1>
+                    <h1 class="titulo" th:if="${carro.placa != null}">Editar Carro</h1>
+                </div>
+                <div class="caixa">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div class="formulario">
+                        <form th:action="@{/carros}" th:object="${carro}" method="post">
+                            <div class="row">
+                                <div class="col-2">
+                                    <label>Modelo</label>
+                                    <input type="text" th:field="*{modelo}" class="form-control" required />
+                                </div>
+
+                                <div class="col-2">
+                                    <label>Placa</label>
+                                    <input type="text" th:field="*{placa}" class="form-control" required />
+                                </div>
+
+                                <div class="col-2">
+                                    <label>Marca</label>
+                                    <select th:field="*{marca}" class="form-control">
+                                        <option th:each="t : ${T(com.example.demo.model.Marca).values()}"
+                                            th:value="${t}" th:text="${t}"></option>
+                                    </select>
+                                </div>
+
+                                <div class="col-2">
+                                    <label>Cor</label>
+                                    <input type="text" th:field="*{cor}" class="form-control" required />
+                                </div>
+
+                                <div class="col-2">
+                                    <label>Tipo</label>
+                                    <select th:field="*{tipo}" class="form-control">
+                                        <option th:each="t : ${T(com.example.demo.model.Tipo).values()}" th:value="${t}"
+                                            th:text="${t}"></option>
+                                    </select>
+                                </div>
+
+                                <div class="col-1">
+                                    <label>Ano</label>
+                                    <input type="number" th:field="*{ano}" class="form-control" style="width: 150%;"
+                                        required />
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="row">
+                                <div class="tamImg offsett-1">
+                                    <label for="txtTeste">Inserir imagem</label>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="grid-container">
+                                <div class="grid-item">
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

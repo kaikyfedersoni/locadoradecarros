@@ -1,0 +1,60 @@
+.caixa{
+    display: grid;
+    grid-template-columns: 15vw 70vw 15vw;
+    grid-template-rows: 10vh 80vh 10vh;
+}
+
+.fundo{
+    background-color: rgb(248, 242, 166); 
+    height: 200ch;
+}
+
+.formulario{
+    border-color: black;
+    align-items: center;
+}
+
+
+.titulo {
+    font-family: 'Minion';
+    text-align: center;
+    background-color: rgb(253, 200, 76);
+
+}
+
+.espacotitulo{
+
+    background-color: rgb(253, 200, 76);
+    height: 15ch;
+    width: 180ch;
+}
+
+.borda-sombra {
+    color: rgb(0, 0, 0);  /* Cor do texto */
+    text-shadow: 
+        1px 1px 0 rgb(255, 255, 255), 
+        -1px -1px 0 rgb(255, 255, 255),
+        -1px 1px 0 rgb(255, 255, 255),
+        1px -1px 0 rgb(255, 255, 255); /* Cria a borda */
+        font-style: italic;
+        font-size:9ch;
+}
+
+.tamImg{
+    width: 20ch;
+    height: 15ch;
+    background-color: rgb(255, 255, 255);
+    border-color: black;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, auto); 
+    justify-content: center;
+    gap: 20px; 
+}
+
+.grid-item {
+    text-align: center; 
+}
+

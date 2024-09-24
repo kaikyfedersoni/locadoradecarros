@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.model.Carro;
 
 
-public interface CarroRepository extends JpaRepository<Carro, String>{
+public interface CarroRepository extends JpaRepository<Carro, Long>{
 
 }

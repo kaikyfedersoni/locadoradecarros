@@ -22,11 +22,9 @@ public class CarroController {
     private CarroService carroService;
 
     @Autowired
-    public CarroController(CarroService carroService){
+    public CarroController(CarroService carroService) {
         this.carroService = carroService;
     }
-
-    public CarroController(){}
 
     @PostMapping
     public String salvarCarro(@ModelAttribute Carro carro) {
@@ -34,15 +32,21 @@ public class CarroController {
         return "redirect:/carros";
     }   
 
+    // Método GET para mostrar o formulário de edição
     @GetMapping("/editar/{id}")
-    public String editarCarro(@PathVariable String id, Model model) {
-        Optional<Carro> carro = carroService.buscarCarroPorId(id);   
-        model.addAttribute("carro", carro);
-        return "pages/formCarro"; // Reutiliza o template de formulário
+    public String editarCarro(@PathVariable Long id, Model model) {
+        Optional<Carro> carro = carroService.buscarCarroPorId(id);
+        if (carro.isPresent()) {
+            model.addAttribute("carro", carro.get());
+            return "pages/formCarro"; // Reutiliza o template de formulário
+        } else {
+            // Lógica para lidar com carro não encontrado (opcional)
+            return "redirect:/carros"; // Redirecionar de volta se não encontrado
+        }
     }
 
     @PostMapping("/editar/{id}")
-    public String alterarCarro(@ModelAttribute Carro novoCarro, @PathVariable String id) {
+    public String alterarCarro(@ModelAttribute Carro novoCarro, @PathVariable Long id) {
         carroService.alterarCarro(novoCarro, id);
         return "redirect:/carros";
     }
@@ -60,12 +64,21 @@ public class CarroController {
         return "pages/formCarro"; 
     }
 
-    
+    // Método GET para confirmação de remoção (opcional)
     @GetMapping("/remover/{id}")
-    public String removerCarro(@PathVariable String id) {
+    public String confirmarRemocao(@PathVariable Long id, Model model) {
+        Optional<Carro> carro = carroService.buscarCarroPorId(id);
+        if (carro.isPresent()) {
+            model.addAttribute("carro", carro.get());
+            return "pages/confirmarRemocao"; // Página para confirmar remoção
+        } else {
+            return "redirect:/carros"; // Redirecionar se não encontrado
+        }
+    }
+
+    @PostMapping("/remover/{id}")
+    public String removerCarro(@PathVariable Long id) {
         carroService.removerCarro(id);
         return "redirect:/carros";
     }
-    
 }
-

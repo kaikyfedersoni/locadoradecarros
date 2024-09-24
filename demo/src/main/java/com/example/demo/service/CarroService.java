@@ -20,18 +20,12 @@ public class CarroService{
         this.carroRepository = carroRepository;
     }
 
-    public Carro novoCarro(Carro carro){
-        
-        boolean carroJaExiste = carroRepository.existsById(carro.getPlaca());
-
-        if(carroJaExiste){
-            throw new RuntimeException();
-        }
-
-        return carroRepository.save(carro);
+    public void novoCarro(Carro carro) {
+        carroRepository.save(carro); 
     }
+    
 
-      public Carro alterarCarro(@RequestBody Carro novoCarro, @PathVariable String id) {
+      public Carro alterarCarro(@RequestBody Carro novoCarro, @PathVariable Long id) {
         return carroRepository.findById(id)
                 .map(carro -> {
                     carro.setModelo(novoCarro.getModelo());
@@ -43,7 +37,7 @@ public class CarroService{
                     return carroRepository.save(carro);
                 })
                 .orElseGet(() -> {
-                    novoCarro.setPlaca(id);
+                    novoCarro.setId(id);
                     return carroRepository.save(novoCarro);
                 });
     }
@@ -52,11 +46,11 @@ public class CarroService{
         return carroRepository.findAll();
     }
 
-    public void removerCarro(@PathVariable String id) {
+    public void removerCarro(@PathVariable Long id) {
         carroRepository.deleteById(id);
     }
 
-    public Optional<Carro> buscarCarroPorId(String id) {
+    public Optional<Carro> buscarCarroPorId(Long id) {
         return carroRepository.findById(id);
     }
 

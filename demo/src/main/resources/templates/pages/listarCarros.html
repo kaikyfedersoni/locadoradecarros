@@ -7,18 +7,22 @@
     <h1>Lista de Carros</h1>
     <table>
         <tr>
+            <th>Id</th>
             <th>Placa</th>
             <th>Modelo</th>
             <th>Marca</th>
             <th>Cor</th>
             <th>Tipo</th>
+            <th>Ano</th>
         </tr>
         <tr th:each="carro : ${carros}">
+            <td th:text="${carro.id}">Id</td>
             <td th:text="${carro.placa}">Placa</td>
             <td th:text="${carro.modelo}">Modelo</td>
             <td th:text="${carro.marca}">Marca</td>
             <td th:text="${carro.cor}">Cor</td>
             <td th:text="${carro.tipo}">Tipo</td>
+            <td th:text="${carro.ano}">Ano</td>
         </tr>
     </table>
     <a href="/carros/novo">Adicionar Novo Carro</a>
