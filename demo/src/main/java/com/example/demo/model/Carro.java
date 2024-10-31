@@ -14,26 +14,22 @@ public class Carro {
     @GeneratedValue
     private Long id;
 
-    private String placa;
     private String modelo;
     private int ano;
     
     @Enumerated(EnumType.STRING) 
     private Marca marca;
-    private String cor;
     
-    @Enumerated(EnumType.STRING) 
-    private Tipo tipo;
+    private String urlImagem;
+
     public Carro(){}
 
-    public Carro(Long id,String placa,Marca marca, String modelo,String cor, Tipo tipo, int ano){
+    public Carro(Long id,Marca marca, String modelo, int ano,String urlImagem){
         this.id = id;
-        this.placa = placa;
         this.modelo = modelo;
-        this.cor = cor;
-        this.tipo = tipo;
         this.marca = marca;
         this.ano = ano;
+        this.urlImagem = urlImagem;
     }
 
     public void setId(Long id){
@@ -57,12 +53,6 @@ public class Carro {
         this.ano = ano;
     }
 
-    public String getPlaca() {
-        return placa;
-    }
-    public void setPlaca(String placa){
-        this.placa = placa;
-    }
 
     public String getModelo() {
         return modelo;
@@ -72,21 +62,15 @@ public class Carro {
         this.modelo = modelo;
     }
 
-    public String getCor() {
-        return cor;
+    public String getUrlImagem() {
+        return urlImagem;
     }
 
-    public void setCor(String cor){
-        this.cor = cor;
+    public void setUrlImagem(String urlImagem){
+        this.urlImagem = urlImagem;
     }
 
-    public Tipo getTipo(){
-        return tipo;
-    }
-
-    public void setTipo(Tipo tipo){
-        this.tipo = tipo;
-    }
+    
 
     
 }

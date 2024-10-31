@@ -20,8 +20,8 @@ public class CarroService{
         this.carroRepository = carroRepository;
     }
 
-    public void novoCarro(Carro carro) {
-        carroRepository.save(carro); 
+    public Carro novoCarro(Carro carro) {
+       return carroRepository.save(carro); 
     }
     
 
@@ -29,9 +29,7 @@ public class CarroService{
         return carroRepository.findById(id)
                 .map(carro -> {
                     carro.setModelo(novoCarro.getModelo());
-                    carro.setPlaca(novoCarro.getPlaca());
-                    carro.setCor(novoCarro.getCor());
-                    carro.setTipo(novoCarro.getTipo());
+                    carro.setUrlImagem(novoCarro.getUrlImagem());
                     carro.setMarca(novoCarro.getMarca());
                     carro.setAno(novoCarro.getAno());
                     return carroRepository.save(carro);
