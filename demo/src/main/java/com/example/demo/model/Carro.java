@@ -1,6 +1,10 @@
 package com.example.demo.model;
 
 
+import java.math.BigDecimal;
+
+import com.example.demo.model.to.CarroRequestDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -13,7 +17,6 @@ public class Carro {
     @Id
     @GeneratedValue
     private Long id;
-
     private String modelo;
     private int ano;
     
@@ -21,15 +24,36 @@ public class Carro {
     private Marca marca;
     
     private String urlImagem;
+    private BigDecimal precoDiaria;
 
     public Carro(){}
 
-    public Carro(Long id,Marca marca, String modelo, int ano,String urlImagem){
+    public Carro(Long id,Marca marca, String modelo, int ano,String urlImagem, BigDecimal precoDiaria){
         this.id = id;
         this.modelo = modelo;
         this.marca = marca;
         this.ano = ano;
         this.urlImagem = urlImagem;
+        this.precoDiaria = precoDiaria;
+    }
+
+    public Carro(CarroRequestDTO data){
+        this.modelo = data.modelo();
+        this.marca = data.marca();
+        this.ano = data.ano();
+        this.urlImagem = data.urlImagem();
+        this.precoDiaria = data.precoDiaria();
+
+    }
+
+
+    public BigDecimal getPrecoDiaria(){
+        return precoDiaria;
+    }
+
+    public void setPrecoDiaria(BigDecimal precoDiaria){
+        this.precoDiaria=precoDiaria;
+        
     }
 
     public void setId(Long id){

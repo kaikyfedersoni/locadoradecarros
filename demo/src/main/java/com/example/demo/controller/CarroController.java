@@ -1,9 +1,10 @@
 package com.example.demo.controller;
 
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,38 +15,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Carro;
-import com.example.demo.service.CarroService;
+import com.example.demo.model.to.CarroRequestDTO;
+import com.example.demo.model.to.CarroResponseDTO;
+import com.example.demo.repository.CarroRepository;
+
 
 @RestController
-@RequestMapping("/carros")
+@RequestMapping("/carro")
 public class CarroController {
-    
-    private CarroService carroService;
 
     @Autowired
-    public CarroController(CarroService carroService) {
-        this.carroService = carroService;
-    }
+    private CarroRepository carroRepository;
 
-    @PostMapping
-    public Carro salvarCarro(@RequestBody Carro carro) {
-         return carroService.novoCarro(carro); 
-    }   
-
+    @CrossOrigin(origins= "*", allowedHeaders = "*")
     @GetMapping
-    public List<Carro> listarCarros(){
-        return carroService.listarTodos();
-    }
-    
-    @PutMapping("/{id}")
-    public Carro atualizarCarro(@PathVariable Long id,@RequestBody Carro carroatualizado){
-        return carroService.alterarCarro(carroatualizado, id);
-    }
-
-    @DeleteMapping("/{id}")
-    public void apagarCarro(@PathVariable Long id){
-        carroService.removerCarro(id);
+    public List<CarroResponseDTO> getAll() {
+    List<CarroResponseDTO> carroList = carroRepository.findAll()
+        .stream()
+        .map(CarroResponseDTO::new)
+        .collect(Collectors.toList());
+    return carroList;
     }
 
-    
+    @CrossOrigin(origins= "*", allowedHeaders = "*")
+    @PostMapping
+    public void salvarCarro(@RequestBody CarroRequestDTO data){
+        Carro carroData = new Carro(data);
+        carroRepository.save(carroData);
+        return;
+    }
 }
