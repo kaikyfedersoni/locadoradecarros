@@ -4,25 +4,56 @@
     flex-direction: column;
     justify-content: center;
     width: 100vw;
+    height: 50vw;
+    background-color: rgb(225, 227, 235);
+    color: black;
 }
 
 .card-grid{
+    margin-bottom: 350px;
     display:grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 16px;
+    grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+    gap: 8px;
 }
 
 .container button{
-    background-color: #0275d8;
-    color: white;
+    background-color: #b6c1cb;
+    color: rgb(0, 0, 0);
     font-weight:bold;
-    position: fixed;
-    bottom: 16px;
-    right: 24px;
     transition: all 0.1s linear 0.1s;
 }
 
 .container button:hover{
     box-shadow: rgba(100,100,111, 0.2) 0px 7px 7px 0px;
     transform: scale(1.1);
+}
+
+.logoSize{
+    width: 100vw;
+    height: 18vw;
+}
+
+.espacamento{
+    padding-left: 8px;
+    padding-bottom: 4px;
+    display: flex;
+    gap: 16px;
+    height: 50px;
+}
+.txtarea{
+    border-width: 2px;
+    border-color: white;
+    border-radius: 8%;
+    width: 180px;
+    height: 42px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    appearance: center;
+    text-align: center;
+}
+
+.txtarea:hover{
+    border-color: red;
+    color: red;
 }

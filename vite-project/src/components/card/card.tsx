@@ -1,21 +1,22 @@
-import "./card.css";
+import "./card.css"; 
 
 interface CardProps {
     marca: string;
     modelo: string;
     ano: number;
+    combustao: string;
+    marchas: number;
     urlImagem: string;
     precoDiaria: number;
 }
 
-export function Card({ marca, modelo, ano, urlImagem, precoDiaria }: CardProps) {
+export function Card({ marca, modelo, ano, urlImagem, combustao, marchas, precoDiaria, }: CardProps) {
     return (
         <div className="card">
-            <img src={urlImagem}/>
-            <h2>{marca}</h2>
-            <h2>{modelo}</h2>
-            <h2>{ano}</h2>
-            <p><b>Valor Diária:</b>{precoDiaria}</p>
+            <h2>{marca} {modelo} {ano}</h2>
+            <h2> {marchas} <b>marchas</b> {combustao} </h2>
+            <img src={urlImagem} alt={`${marca} ${modelo} ${combustao} ${marchas} Marchas`} />
+            <p><b>Valor Diária: R$</b>{precoDiaria}</p>
         </div>
     );
 }

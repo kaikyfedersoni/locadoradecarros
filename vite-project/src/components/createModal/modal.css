@@ -16,9 +16,13 @@
 .modal-overlay .modal-body {
     background-color: white;
     padding: 24px;
+    padding-top: 40px;
+    padding-bottom: 80px;
     height: 100;
     width: 60%;
     border-radius: 24px;
+    border-width: 4px;
+    border-color: red;
 
     display: flex;
     align-items: flex-start;
@@ -26,8 +30,11 @@
     justify-content: space-between;
 }
 
-.modal-overlay .modal-body h2 {
-    font-size: 20px;
+.modal-overlay .modal-body h2{
+    font-size: 32px;
+    margin-top: 4px;
+    margin-bottom: 15px;
+    color: black;
 }
 
 .modal-overlay .modal-body .input-container {
@@ -36,30 +43,44 @@
 
 .modal-overlay .modal-body input {
     padding: 12px;
-    border: 2px solid #c6c5c5c5;
-    color: rgba(0,0,0,0.9);
+    border: 2px solid #ff0000c5;
+    color: rgba(254, 254, 254, 0.9);
     font-size: 14px;
-    line-height: 20px;
+    line-height: 5px;
     border-radius: 12px;
     width: 100%;
-
-    margin-bottom: 12px;
+    margin-bottom: 4px;
 }
+
 
 .modal-overlay .modal-body label {
     color: #242424;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 2px;
     font-size: 18px;
 }
 
 .modal-overlay .modal-body .btn-secondary {
     position: initial;
     width: 100%;
-    margin-top: 32px;
+    margin-top: 12px;
+    margin-left: 60px;
 }
 
 .modal-overlay .modal-body .btn-secondary:hover {
-    background-color: #3a44f8;
+    background-color: hsl(0, 0%, 24%);
     transform: scale(1);
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 150px; 
+    margin-top: 5px;
+}
+
+.logoSize2{
+    margin-left: 110px;
+    width: 600px;
+    height: 120px;
 }
