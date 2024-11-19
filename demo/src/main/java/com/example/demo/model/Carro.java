@@ -19,21 +19,25 @@ public class Carro {
     private Long id;
     private String modelo;
     private int ano;
+    private int marchas;
     
     @Enumerated(EnumType.STRING) 
     private Marca marca;
+    private String combustao;
     
     private String urlImagem;
     private BigDecimal precoDiaria;
 
     public Carro(){}
 
-    public Carro(Long id,Marca marca, String modelo, int ano,String urlImagem, BigDecimal precoDiaria){
+    public Carro(Long id,Marca marca, String modelo, int ano,String urlImagem, String combustao, int marchas, BigDecimal precoDiaria){
         this.id = id;
         this.modelo = modelo;
         this.marca = marca;
         this.ano = ano;
         this.urlImagem = urlImagem;
+        this.combustao = combustao;
+        this.marchas = marchas;
         this.precoDiaria = precoDiaria;
     }
 
@@ -42,6 +46,8 @@ public class Carro {
         this.marca = data.marca();
         this.ano = data.ano();
         this.urlImagem = data.urlImagem();
+        this.combustao = data.combustao();
+        this.marchas = data.marchas();
         this.precoDiaria = data.precoDiaria();
 
     }
@@ -94,7 +100,21 @@ public class Carro {
         this.urlImagem = urlImagem;
     }
 
-    
+    public void setCombustao(String combustao){
+        this.combustao = combustao;
+    }
+
+    public String getCombustao() {
+        return combustao;
+    }
+
+    public void setMarchas(int marchas){
+        this.marchas = marchas;
+    }
+
+    public int getMarchas() {
+        return marchas;
+    }
 
     
 }
