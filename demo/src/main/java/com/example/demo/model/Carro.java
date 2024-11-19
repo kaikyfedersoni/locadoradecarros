@@ -9,32 +9,35 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Carro {
    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
     private String modelo;
     private int ano;
+    private int marchas;
     
     @Enumerated(EnumType.STRING) 
     private Marca marca;
+    private String combustao;
     
     private String urlImagem;
     private double precoDiaria;
 
     public Carro(){}
 
-    public Carro(Long id,Marca marca, String modelo, int ano,String urlImagem, double precoDiaria){
+    public Carro(Long id,Marca marca, String modelo, int ano,String urlImagem, String combustao, int marchas, double precoDiaria){
         this.id = id;
         this.modelo = modelo;
         this.marca = marca;
         this.ano = ano;
         this.urlImagem = urlImagem;
+        this.combustao = combustao;
+        this.marchas = marchas;
         this.precoDiaria = precoDiaria;
     }
 
@@ -43,6 +46,8 @@ public class Carro {
         this.marca = data.marca();
         this.ano = data.ano();
         this.urlImagem = data.urlImagem();
+        this.combustao = data.combustao();
+        this.marchas = data.marchas();
         this.precoDiaria = data.precoDiaria();
 
     }
@@ -95,7 +100,21 @@ public class Carro {
         this.urlImagem = urlImagem;
     }
 
-    
+    public void setCombustao(String combustao){
+        this.combustao = combustao;
+    }
+
+    public String getCombustao() {
+        return combustao;
+    }
+
+    public void setMarchas(int marchas){
+        this.marchas = marchas;
+    }
+
+    public int getMarchas() {
+        return marchas;
+    }
 
     
 }

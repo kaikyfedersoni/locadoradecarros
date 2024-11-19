@@ -61,7 +61,8 @@ export function CreateModal({closeModal}:ModalProps){
                     <Input label="urlImagem" value={urlImagem} updateValue={setUrlImagem}></Input>
                     <Input label="precoDiaria" value={precoDiaria} updateValue={setPrecoDiaria}></Input>
                 </form>
-                <button onClick={submit} className="btn-secondary"> </button>
+                <button onClick={submit} className="btn-secondary">salvar</button>
+            
             </div>
         </div>
     )

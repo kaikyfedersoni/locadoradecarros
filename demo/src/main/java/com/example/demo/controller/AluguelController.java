@@ -14,13 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Aluguel;
-import com.example.demo.model.Usuario;
 import com.example.demo.model.to.AluguelRequestDTO;
 import com.example.demo.model.to.AluguelResponseDTO;
-import com.example.demo.model.to.UsuarioRequestDTO;
-import com.example.demo.model.to.UsuarioResponseDTO;
 import com.example.demo.repository.AluguelRepository;
-import com.example.demo.repository.UsuarioRepository;
+
 
 @RestController
 @RequestMapping("/aluguel")
