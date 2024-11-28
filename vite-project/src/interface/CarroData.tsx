@@ -5,8 +5,8 @@ export interface CarroData {
     modelo: string,
     ano: number,
     urlImagem: string,
-    combustao: string;
-    marchas: number;
+    combustao: string,
+    marchas: number,
     precoDiaria: number
 
 }

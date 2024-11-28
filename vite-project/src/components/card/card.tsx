@@ -1,5 +1,20 @@
 import "./card.css"; 
 
+import { Pencil, Person, Trash } from 'react-bootstrap-icons';
+
+function App() {
+    return (
+      <>
+        <div> <Pencil /> Editar </div>
+        <div> <Trash /> Excluir </div>
+        <div> <Person/> Login </div>
+      </>
+    );
+  }
+  
+  export default App;
+
+
 interface CardProps {
     marca: string;
     modelo: string;
@@ -17,6 +32,7 @@ export function Card({ marca, modelo, ano, urlImagem, combustao, marchas, precoD
             <h2> {marchas} <b>marchas</b> {combustao} </h2>
             <img src={urlImagem} alt={`${marca} ${modelo} ${combustao} ${marchas} Marchas`} />
             <p><b>Valor Diária: R$</b>{precoDiaria}</p>
+            <div className="btnCard"> <button> <Pencil/> </button> <button> Locar </button>  <button > <Trash /> </button> </div>
         </div>
     );
 }
