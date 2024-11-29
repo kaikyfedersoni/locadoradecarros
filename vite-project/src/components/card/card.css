@@ -19,7 +19,6 @@
     height: 200px;
 } 
 
-<<<<<<< HEAD
 .card:hover {
    background-color: rgb(114, 114, 114);
    transform: scale(1.1);
@@ -32,9 +31,6 @@
   }
 
   
-
-  
-=======
 .card button {
     padding: 10px 20px;
     background-color: #007bff;
@@ -49,5 +45,3 @@
     background-color: #0056b3;
 }
 
-
->>>>>>> f12afe8f26cdcf458f78e0031cd5ed7a44d68cec
