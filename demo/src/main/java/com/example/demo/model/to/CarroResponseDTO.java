@@ -1,5 +1,10 @@
 package com.example.demo.model.to;
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> f12afe8f26cdcf458f78e0031cd5ed7a44d68cec
 import com.example.demo.model.Carro;
 import com.example.demo.model.Marca;
 

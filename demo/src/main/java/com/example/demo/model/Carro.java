@@ -9,14 +9,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Carro {
    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
     private String modelo;
     private int ano;
@@ -32,7 +31,10 @@ public class Carro {
     public Carro(){}
 
     public Carro(Long id,Marca marca, String modelo, int ano,String urlImagem, String combustao, int marchas, double precoDiaria){
+<<<<<<< HEAD
 
+=======
+>>>>>>> f12afe8f26cdcf458f78e0031cd5ed7a44d68cec
         this.id = id;
         this.modelo = modelo;
         this.marca = marca;
