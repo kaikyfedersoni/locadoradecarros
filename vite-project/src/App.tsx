@@ -66,11 +66,6 @@ function App() {
           )}
         </div> 
       </div>
-<<<<<<< HEAD
-=======
-      {isModalOpen && <CreateModal closeModal={handleOpenModal}/>}
-      <button onClick={handleOpenModal}>novo</button>
->>>>>>> f12afe8f26cdcf458f78e0031cd5ed7a44d68cec
     </div>
   );
 }
