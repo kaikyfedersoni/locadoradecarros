@@ -31,10 +31,6 @@ public class Carro {
     public Carro(){}
 
     public Carro(Long id,Marca marca, String modelo, int ano,String urlImagem, String combustao, int marchas, double precoDiaria){
-<<<<<<< HEAD
-
-=======
->>>>>>> f12afe8f26cdcf458f78e0031cd5ed7a44d68cec
         this.id = id;
         this.modelo = modelo;
         this.marca = marca;
