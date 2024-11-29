@@ -29,15 +29,12 @@ export function Card({ marca, modelo, ano, urlImagem, combustao, marchas, precoD
     return (
         <div className="card">
             <h2>{marca} {modelo} {ano}</h2>
-<<<<<<< HEAD
             <h2> {marchas} <b>marchas</b> {combustao} </h2>
             <img src={urlImagem} alt={`${marca} ${modelo} ${combustao} ${marchas} Marchas`} />
             <p><b>Valor Diária: R$</b>{precoDiaria}</p>
             <div className="btnCard"> <button> <Pencil/> </button> <button> Locar </button>  <button > <Trash /> </button> </div>
-=======
             <img src={urlImagem}/>
             <p><b>Valor Diária:</b>{precoDiaria}</p>
->>>>>>> f12afe8f26cdcf458f78e0031cd5ed7a44d68cec
         </div>
     );
 }
