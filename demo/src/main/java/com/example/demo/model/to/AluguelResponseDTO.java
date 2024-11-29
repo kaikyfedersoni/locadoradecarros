@@ -11,8 +11,7 @@ public record AluguelResponseDTO(Long id,LocalDate dataComeco, LocalDate dataFim
         this(aluguel.getId(),aluguel.getDataComeco(),aluguel.getDataFim(),aluguel.getValorFinal(),aluguel.getCarro(),aluguel.getUsuario());
     }
     
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> f12afe8f26cdcf458f78e0031cd5ed7a44d68cec
+
+
