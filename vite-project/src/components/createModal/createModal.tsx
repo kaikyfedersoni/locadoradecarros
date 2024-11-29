@@ -74,11 +74,6 @@ export function CreateModal({ closeModal }: ModalProps) {
                         <button type="button" onClick={closeModal} className="btn-secondary">Voltar</button>
                     </div>
                 </form>
-<<<<<<< HEAD
-=======
-                <button onClick={submit} className="btn-secondary">salvar</button>
-            
->>>>>>> f12afe8f26cdcf458f78e0031cd5ed7a44d68cec
             </div>
         </div>
     );
