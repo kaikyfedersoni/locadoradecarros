@@ -14,15 +14,12 @@
     padding-top: 5px;
     margin-top: 10px;
     display:grid;
-<<<<<<< HEAD
     align-items: first baseline;
     grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
     gap: 22px;
-=======
     grid-template-columns: 1fr 1fr 1fr;
     gap: 12px;
->>>>>>> f12afe8f26cdcf458f78e0031cd5ed7a44d68cec
-}
+
 
 .container button{
     background-color: transparent;
