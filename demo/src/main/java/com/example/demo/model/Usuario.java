@@ -15,20 +15,23 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
+    private String role;
 
     public Usuario(){}
 
-    public Usuario(Long id,String nome,String email,String senha){
+    public Usuario(Long id,String nome,String email,String senha,String role){
         this.id =id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.role = role;
     }
 
     public Usuario(UsuarioRequestDTO data){
         this.nome = data.nome();
         this.email = data.email();
         this.senha = data.senha();
+        this.role = data.role();
     }
 
     public void setId(Long id){
@@ -59,7 +62,11 @@ public class Usuario {
         return senha;
     }
 
-    
+    public void setRole(String role){
+        this.role = role;
+    }
 
-
+    public String getRole(){
+        return role;
+    }
 }

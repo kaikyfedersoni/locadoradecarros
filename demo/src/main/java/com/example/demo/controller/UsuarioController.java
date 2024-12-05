@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.example.demo.model.Usuario;
 import com.example.demo.model.to.UsuarioRequestDTO;
 import com.example.demo.model.to.UsuarioResponseDTO;
@@ -41,7 +40,7 @@ public class UsuarioController {
     public void salvarUsuario(@RequestBody UsuarioRequestDTO data) {
         Usuario usuarioData = new Usuario(data);
         usuarioRepository.save(usuarioData);
-        return;
+        
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -58,6 +57,7 @@ public class UsuarioController {
                     usuario.setNome(novoUsuario.getNome());
                     usuario.setEmail(novoUsuario.getEmail());
                     usuario.setSenha(novoUsuario.getSenha());
+                    usuario.setRole(novoUsuario.getRole());
                     return usuarioRepository.save(usuario);
                 })
                 .orElseGet(() -> {

@@ -41,7 +41,7 @@ public class AluguelController {
     public void salvarAluguel(@RequestBody AluguelRequestDTO data) {
         Aluguel aluguelData = new Aluguel(data);
         aluguelRepository.save(aluguelData);
-        return;
+        
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")

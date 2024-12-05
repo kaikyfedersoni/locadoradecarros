@@ -41,7 +41,7 @@ public class CarroController {
     public void salvarCarro(@RequestBody CarroRequestDTO data) {
         Carro carroData = new Carro(data);
         carroRepository.save(carroData);
-        return;
+        
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")

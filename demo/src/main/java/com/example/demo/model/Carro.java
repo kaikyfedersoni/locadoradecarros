@@ -1,8 +1,5 @@
 package com.example.demo.model;
 
-
-
-
 import com.example.demo.model.to.CarroRequestDTO;
 
 import jakarta.persistence.Entity;
