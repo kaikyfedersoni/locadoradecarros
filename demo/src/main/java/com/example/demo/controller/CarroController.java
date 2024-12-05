@@ -21,14 +21,14 @@ import com.example.demo.model.to.CarroResponseDTO;
 import com.example.demo.repository.CarroRepository;
 
 @RestController
-@RequestMapping("/carro")
+@RequestMapping("/api/carro")
 public class CarroController {
 
     @Autowired
     private CarroRepository carroRepository;
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @GetMapping
+    @GetMapping("/listar")
     public List<CarroResponseDTO> getAll() {
         List<CarroResponseDTO> carroList = carroRepository.findAll()
                 .stream()
@@ -47,13 +47,15 @@ public class CarroController {
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/excluir/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deletarCarro(@PathVariable Long id) {
         carroRepository.deleteById(id);
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @PutMapping("/{id}")
+    @PutMapping("editar/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public Carro atualizarCarro(@PathVariable Long id, @RequestBody Carro novoCarro) {
         return carroRepository.findById(id)
                 .map(carro -> {

@@ -1,7 +1,7 @@
 package com.example.demo.model;
 
 import java.time.LocalDate;
-import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
 import com.example.demo.model.to.AluguelRequestDTO;
 
@@ -44,13 +44,14 @@ public class Aluguel {
         this.valorFinal = valorFinal;
     }
 
-    public Aluguel(AluguelRequestDTO data){
-        this.carro = data.carro();
-        this.usuario = data.usuario();
+    public Aluguel(AluguelRequestDTO data, Carro carro, Usuario usuario) {
+        this.carro = carro;
+        this.usuario = usuario;
         this.dataComeco = data.dataComeco();
         this.dataFim = data.dataFim();
-        this.valorFinal = data.valorFinal();
+        calcularValorFinal(); // Calcula o valor final
     }
+
 
     public void setCarro(Carro carro){
         this.carro = carro;
@@ -68,11 +69,11 @@ public class Aluguel {
         this.dataFim = dataFim;
     }
 
-    public void setValorFinal (double valorFinal){
-        Period periodo = Period.between(dataComeco,dataFim);
-        double dias = periodo.getDays();
-        this.valorFinal = dias*carro.getPrecoDiaria();
-    }
+    public void calcularValorFinal() {
+    long dias = ChronoUnit.DAYS.between(this.dataComeco, this.dataFim);
+    this.valorFinal = Math.max(1, dias) * this.carro.getPrecoDiaria();
+}
+
 
     public void setId(Long id){
         this.id = id;

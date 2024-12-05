@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,7 +21,7 @@ import com.example.demo.model.to.UsuarioResponseDTO;
 import com.example.demo.repository.UsuarioRepository;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/api/auth")
 public class UsuarioController {
 
     @Autowired
@@ -30,7 +31,8 @@ public class UsuarioController {
     private PasswordEncoder passwordEncoder;
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/listar")
     public List<UsuarioResponseDTO> getAll() {
         List<UsuarioResponseDTO> usuarioList = usuarioRepository.findAll()
                 .stream()
@@ -40,7 +42,7 @@ public class UsuarioController {
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @PostMapping
+    @PostMapping("/registrar")
     public void salvarUsuario(@RequestBody UsuarioRequestDTO data) {
         Usuario usuarioData = new Usuario(data);
         usuarioData.setSenha(passwordEncoder.encode(data.senha()));
@@ -49,13 +51,13 @@ public class UsuarioController {
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/excluir/{id}")
     public void deletarUsuario(@PathVariable Long id) {
         usuarioRepository.deleteById(id);
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @PutMapping("/{id}")
+    @PutMapping("/editar/{id}")
     public Usuario atualizarUsuario(@PathVariable Long id, @RequestBody Usuario novoUsuario) {
         return usuarioRepository.findById(id)
                 .map(usuario -> {
