@@ -39,7 +39,6 @@ public class CarroController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/adicionar")
-    @PreAuthorize("hasRole('ADMIN')")
     public void salvarCarro(@RequestBody CarroRequestDTO data) {
         Carro carroData = new Carro(data);
         carroRepository.save(carroData);

@@ -31,7 +31,6 @@ public class UsuarioController {
     private PasswordEncoder passwordEncoder;
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/listar")
     public List<UsuarioResponseDTO> getAll() {
         List<UsuarioResponseDTO> usuarioList = usuarioRepository.findAll()
