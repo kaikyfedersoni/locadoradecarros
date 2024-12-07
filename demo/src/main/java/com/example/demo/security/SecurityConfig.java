@@ -15,10 +15,7 @@ public class SecurityConfig {
         http
         .csrf().disable()
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/api/aluguel","/api/aluguel/listar","/api/aluguel/excluir/**","/api/aluguel/editar/**","/api/aluguel/alugar").permitAll()
-            .requestMatchers("/api/auth","/api/auth/listar","/api/auth/excluir/**","/api/auth/editar/**","/api/auth/registrar").permitAll()
-            .requestMatchers("/api/carro","/api/carro/listar","/api/carro/excluir/**","/api/carro/editar/**","/api/carro/adicionar").permitAll()
-            .anyRequest().authenticated() 
+            .anyRequest().permitAll()
         )
         .httpBasic(); 
     return http.build();
