@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -38,6 +39,7 @@ public class AluguelController {
     private UsuarioRepository usuarioRepository;
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/listar")
     public List<AluguelResponseDTO> getAll() {
         return aluguelRepository.findAll()
@@ -62,6 +64,7 @@ public class AluguelController {
 }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/excluir/{id}")
     public void deletarUsuario(@PathVariable Long id) {
         aluguelRepository.deleteById(id);

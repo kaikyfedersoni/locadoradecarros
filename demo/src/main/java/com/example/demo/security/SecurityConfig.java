@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class SecurityConfig {
@@ -15,7 +17,10 @@ public class SecurityConfig {
         http
         .csrf().disable()
         .authorizeHttpRequests(auth -> auth
-            .anyRequest().permitAll()
+        .requestMatchers("/api/carro/adicionar","/api/carro/editar/**","/api/carro/excluir/**").hasRole("ADMIN") 
+        .requestMatchers("/api/aluguel/listar","/api/auth/listar").hasRole("ADMIN")
+        .requestMatchers("/api/aluguel/alugar").hasRole("CLIENTE")
+        .anyRequest().permitAll()
         )
         .httpBasic(); 
     return http.build();
@@ -26,4 +31,3 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
-

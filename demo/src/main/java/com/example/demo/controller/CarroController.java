@@ -1,9 +1,12 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,34 +30,46 @@ public class CarroController {
     @Autowired
     private CarroRepository carroRepository;
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")
     @GetMapping("/listar")
     public List<CarroResponseDTO> getAll() {
-        List<CarroResponseDTO> carroList = carroRepository.findAll()
+        return carroRepository.findAll()
                 .stream()
                 .map(CarroResponseDTO::new)
                 .collect(Collectors.toList());
-        return carroList;
     }
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/adicionar")
-    public void salvarCarro(@RequestBody CarroRequestDTO data) {
-        Carro carroData = new Carro(data);
-        carroRepository.save(carroData);
-        
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> salvarCarro(@RequestBody Carro carro) {
+        System.out.println("Recebendo requisição POST para adicionar carro...");
+        System.out.println("Dados recebidos: " + carro);
+
+        try {
+            Carro savedCarro = carroRepository.save(carro);
+            return ResponseEntity.ok(savedCarro);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao salvar o carro");
+        }
     }
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/excluir/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public void deletarCarro(@PathVariable Long id) {
-        carroRepository.deleteById(id);
+    public ResponseEntity<Void> deletarCarro(@PathVariable Long id) {
+        Optional<Carro> carroOptional = carroRepository.findById(id);
+        if (carroOptional.isPresent()) {
+            carroRepository.delete(carroOptional.get());
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @PutMapping("editar/{id}")
+    @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")
     @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/editar/{id}")
     public Carro atualizarCarro(@PathVariable Long id, @RequestBody Carro novoCarro) {
         return carroRepository.findById(id)
                 .map(carro -> {
@@ -67,10 +82,6 @@ public class CarroController {
                     carro.setMarchas(novoCarro.getMarchas());
                     return carroRepository.save(carro);
                 })
-                .orElseGet(() -> {
-                    novoCarro.setId(id);
-                    return carroRepository.save(novoCarro);
-                });
+                .orElseThrow(() -> new RuntimeException("Carro não encontrado"));
     }
-
 }

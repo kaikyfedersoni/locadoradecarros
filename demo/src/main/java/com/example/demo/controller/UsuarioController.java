@@ -31,6 +31,7 @@ public class UsuarioController {
     private PasswordEncoder passwordEncoder;
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/listar")
     public List<UsuarioResponseDTO> getAll() {
         List<UsuarioResponseDTO> usuarioList = usuarioRepository.findAll()
@@ -50,12 +51,14 @@ public class UsuarioController {
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/excluir/{id}")
     public void deletarUsuario(@PathVariable Long id) {
         usuarioRepository.deleteById(id);
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/editar/{id}")
     public Usuario atualizarUsuario(@PathVariable Long id, @RequestBody Usuario novoUsuario) {
         return usuarioRepository.findById(id)
@@ -63,7 +66,7 @@ public class UsuarioController {
                     usuario.setNome(novoUsuario.getNome());
                     usuario.setEmail(novoUsuario.getEmail());
                     usuario.setSenha(novoUsuario.getSenha());
-                    usuario.setRole(novoUsuario.getRole());
+                    novoUsuario.setRole("Cliente");
                     return usuarioRepository.save(usuario);
                 })
                 .orElseGet(() -> {
