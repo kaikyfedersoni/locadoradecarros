@@ -16,10 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Carro;
-import com.example.demo.model.to.CarroRequestDTO;
+import com.example.demo.model.Marca;
 import com.example.demo.model.to.CarroResponseDTO;
 import com.example.demo.repository.CarroRepository;
 
@@ -84,4 +85,35 @@ public class CarroController {
                 })
                 .orElseThrow(() -> new RuntimeException("Carro não encontrado"));
     }
+
+    @GetMapping("/listar/marca/{marca}")
+    public ResponseEntity<List<Carro>> buscarPorMarca(@PathVariable Marca marca) {
+    List<Carro> carros = carroRepository.findByMarca(marca);
+
+    if (carros.isEmpty()) {
+        return ResponseEntity.noContent().build(); 
+    }
+    return ResponseEntity.ok(carros); 
+}
+
+@GetMapping("/listar/modelo/{modelo}")
+public ResponseEntity<List<Carro>> buscarPorModelo(@PathVariable String modelo) {
+    List<Carro> carros = carroRepository.findByModeloContaining(modelo);
+
+    if (carros.isEmpty()) {
+        return ResponseEntity.noContent().build(); 
+    }
+    return ResponseEntity.ok(carros); 
+}
+
+@GetMapping("/listar/ano/{ano}")
+public ResponseEntity<List<Carro>> buscarPorAno(@PathVariable int ano) {
+    List<Carro> carros = carroRepository.findByAno(ano);
+    if (carros.isEmpty()) {
+        return ResponseEntity.noContent().build(); 
+    }
+    return ResponseEntity.ok(carros); 
+}
+
+
 }
