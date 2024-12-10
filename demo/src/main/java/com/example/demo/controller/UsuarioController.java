@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.Carro;
 import com.example.demo.model.Usuario;
 import com.example.demo.model.to.UsuarioRequestDTO;
 import com.example.demo.model.to.UsuarioResponseDTO;
@@ -74,5 +76,15 @@ public class UsuarioController {
                     return usuarioRepository.save(novoUsuario);
                 });
     }
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/listar/role/{role}")
+    public ResponseEntity<List<Usuario>> buscarPorModelo(@PathVariable String role) {
+    List<Usuario> usuarios = usuarioRepository.findByRole(role);
+
+    if (usuarios.isEmpty()) {
+        return ResponseEntity.noContent().build(); 
+    }
+    return ResponseEntity.ok(usuarios); 
+}
 
 }

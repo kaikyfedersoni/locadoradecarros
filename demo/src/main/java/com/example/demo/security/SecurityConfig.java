@@ -18,7 +18,7 @@ public class SecurityConfig {
         .csrf().disable()
         .authorizeHttpRequests(auth -> auth
         .requestMatchers("/api/carro/adicionar","/api/carro/editar/**","/api/carro/excluir/**").hasRole("ADMIN") 
-        .requestMatchers("/api/aluguel/listar","/api/auth/listar").hasRole("ADMIN")
+        .requestMatchers("/api/aluguel/listar","/api/aluguel/excluir/**","/api/auth/listar","/api/auth/listar/role/**").hasRole("ADMIN")
         .requestMatchers("/api/aluguel/alugar").hasRole("CLIENTE")
         .anyRequest().permitAll()
         )
