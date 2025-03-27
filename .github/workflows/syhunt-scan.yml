@@ -1,4 +1,4 @@
-name: syhunt test
+name: Syhunt Security Scans
 
 on:
   push:
@@ -6,17 +6,30 @@ on:
       - main
 
 jobs:
-  build:
+  sast:
+    name: Static Analysis
     runs-on: [self-hosted, Windows, X64]
     steps:
       - uses: actions/checkout@v2
-
-      - run: Start-CodeScan -pfcond 'medium' -output 'report.pdf'
-
-      - name: 'Syhunt Report'
+      - run: Start-CodeScan -pfcond 'medium' -output 'sast-report.pdf'
+      - name: 'Upload SAST Report'
         uses: actions/upload-artifact@v2
         if: failure()
         with:
-          name: syhunt-report
-          path: report.pdf
+          name: syhunt-sast-report
+          path: sast-report.pdf
+          if-no-files-found: error
+
+  dast:
+    name: Dynamic Analysis
+    runs-on: [self-hosted, Windows, X64]
+    needs: sast
+    steps:
+      - run: Start-DynamicScan -target 'www.productionurl.com' -pfcond 'medium' -output 'dast-report.pdf'
+      - name: 'Upload DAST Report'
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: syhunt-dast-report
+          path: dast-report.pdf
           if-no-files-found: error
