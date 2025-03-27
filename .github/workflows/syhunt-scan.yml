@@ -3,17 +3,28 @@ on:
   push:
     branches:
       - main
+
+permissions:
+  contents: read
+  actions: read
+  security-events: write
+
 jobs:
   build:
     runs-on: [self-hosted, Windows, X64]
-    steps:
 
-      - uses: actions/checkout@v2
-      - run: Start-CodeScan -pfcond 'medium' -output 'report.pdf'
-      - name: 'Syhunt Report'
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Executar análise de código com Syhunt
+        shell: powershell
+        run: Start-CodeScan -pfcond 'medium' -output 'report.pdf'
+        continue-on-error: true
+
+      - name: Upload do Relatório Syhunt
         uses: actions/upload-artifact@v3
-        if: failure()
         with:
-         name: syhunt-report
-         path: report.pdf
-         if-no-files-found: error
+          name: syhunt-report
+          path: report.pdf
+          if-no-files-found: error
