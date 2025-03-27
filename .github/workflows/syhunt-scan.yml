@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  packages: read
+  actions: read
+  
 jobs:
   sast:
     name: Static Analysis
