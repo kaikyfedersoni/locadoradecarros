@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout do código
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Executar análise de código com Syhunt
         shell: powershell
@@ -23,7 +23,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload do Relatório Syhunt
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: syhunt-report
           path: report.pdf
